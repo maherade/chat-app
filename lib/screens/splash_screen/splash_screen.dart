@@ -1,15 +1,25 @@
 import 'dart:async';
 
 import 'package:chat/screens/create_account_screen/create_account.dart';
+import 'package:chat/screens/home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/my_provider.dart';
 
 class SplashScreen extends StatelessWidget {
   static const String routeName = 'splash';
 
   @override
   Widget build(BuildContext context) {
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, CreateAccount.routeName);
+    var provider = Provider.of<MyProvider>(context);
+
+    Timer(const Duration(seconds: 5), () {
+      Navigator.pushReplacementNamed(
+          context,
+          provider.firebaseUser != null
+              ? HomeScreen.routeName
+              : CreateAccount.routeName);
     });
     return SafeArea(
       child: Stack(
