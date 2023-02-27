@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 
 abstract class BaseNavigator {
   void showLoading({String message});
-
   void showMessage(String message);
 
-  void hideLoading();
-
-  void navigate();
+  void hideDialog();
 }
 
 abstract class BaseViewModel<NAV extends BaseNavigator> extends ChangeNotifier {
@@ -27,7 +24,7 @@ abstract class BaseView<T extends StatefulWidget, VM extends BaseViewModel>
   }
 
   @override
-  void hideLoading() {
+  void hideDialog() {
     Navigator.pop(context);
   }
 
