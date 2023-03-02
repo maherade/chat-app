@@ -4,6 +4,7 @@ import 'package:chat/screens/home/home_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../add_room/add_room_screen.dart';
 import '../login_screen/login_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,6 +25,15 @@ class _HomeScreenState extends BaseView<HomeScreen, HomeViewModel>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, AddRoomScreen.routeName);
+        },
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
       appBar: AppBar(
         title: Text("Chat App"),
         actions: [
