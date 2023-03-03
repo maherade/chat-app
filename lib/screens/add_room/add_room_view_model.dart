@@ -9,7 +9,7 @@ class AddRoomViewModel extends BaseViewModel<AddRoomNavigator> {
     Room room = Room(title: title, description: description, catId: catId);
 
     DataBaseUtils.addRoomToFireStore(room).then((value) {
-      print("Room Added");
+      navigator!.roomCreated();
     }).catchError((error) {});
   }
 }

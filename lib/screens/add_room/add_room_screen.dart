@@ -254,8 +254,12 @@ class _AddRoomScreenState extends BaseView<AddRoomScreen, AddRoomViewModel>
   }
 
   @override
+  void roomCreated() {
+    Navigator.pop(context);
+  }
+
+  @override
   AddRoomViewModel initViewModel() {
-    // TODO: implement initViewModel
     return AddRoomViewModel();
   }
 }
