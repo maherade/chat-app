@@ -63,20 +63,34 @@ class _HomeScreenState extends BaseView<HomeScreen, HomeViewModel>
                     icon: const Icon(Icons.logout))
               ],
             ),
-            body: Consumer<HomeViewModel>(
-              builder: (context, homeViewModel, child) {
-                return GridView.builder(
-                  itemBuilder: (context, index) {
-                    return RoomWidget(homeViewModel.rooms[index]);
-                  },
-                  itemCount: homeViewModel.rooms.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 12,
-                    crossAxisSpacing: 12,
-                  ),
-                );
-              },
+            body: RefreshIndicator(
+              onRefresh: refresh,
+              triggerMode: RefreshIndicatorTriggerMode.onEdge,
+              backgroundColor: Colors.white,
+              color: Colors.blue,
+              displacement: 10,
+              edgeOffset: 0,
+              strokeWidth: 3,
+              child: Consumer<HomeViewModel>(
+                builder: (context, homeViewModel, child) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 15),
+                    child: GridView.builder(
+                      itemBuilder: (context, index) {
+                        return RoomWidget(homeViewModel.rooms[index]);
+                      },
+                      itemCount: homeViewModel.rooms.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 12,
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],
@@ -87,5 +101,11 @@ class _HomeScreenState extends BaseView<HomeScreen, HomeViewModel>
   @override
   HomeViewModel initViewModel() {
     return HomeViewModel();
+  }
+
+  Future<void> refresh() async {
+    setState(() {
+      viewModel.readRooms();
+    });
   }
 }
