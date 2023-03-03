@@ -36,18 +36,25 @@ class SenderMessage extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(
-            color: Colors.blue.withOpacity(.9),
-            borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(12),
-                bottomLeft: Radius.circular(12),
-                topLeft: Radius.circular(12)),
-          ),
-          child: Text(
-            message.content,
-            style: const TextStyle(color: Colors.white),
+        InkWell(
+          onLongPress: () {
+            // FirebaseFirestore.instance.collection('Messages').doc(message.id).update({
+            //   message.id : FieldValue.delete(),
+            // });
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            decoration: BoxDecoration(
+              color: Colors.blue.withOpacity(.9),
+              borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(12),
+                  bottomLeft: Radius.circular(12),
+                  topLeft: Radius.circular(12)),
+            ),
+            child: Text(
+              message.content,
+              style: const TextStyle(color: Colors.white),
+            ),
           ),
         ),
         const SizedBox(

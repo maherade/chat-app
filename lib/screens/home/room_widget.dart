@@ -22,8 +22,8 @@ class RoomWidget extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 5,
-                blurRadius: 7,
+                spreadRadius: 2,
+                blurRadius: 5,
                 offset: const Offset(0, 3),
               )
             ]),
@@ -34,7 +34,7 @@ class RoomWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
                 "assets/images/${room.catId}.png",
-                width: MediaQuery.of(context).size.width * .35,
+                width: MediaQuery.of(context).size.width * .30,
                 fit: BoxFit.fitWidth,
               ),
             ),
