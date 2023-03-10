@@ -1,8 +1,13 @@
 import 'package:chat/base.dart';
+import 'package:chat/models/my_user.dart';
+import 'package:chat/screens/create_account_screen/create_account.dart';
 import 'package:chat/screens/login_screen/login_navigator.dart';
 import 'package:chat/screens/login_screen/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../providers/my_provider.dart';
+import '../home/home.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = 'login-screen';
@@ -160,6 +165,15 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                                 ),
                               ),
                             ),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, CreateAccount.routeName);
+                                },
+                                child: const Text(
+                                  "Don't have an Account? register here",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ))
                           ]),
                     ),
                   ),
@@ -182,6 +196,10 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
     return LoginViewModel();
   }
 
+
   @override
-  void navigate() {}
+  void goToHome(MyUser myUser) {
+    var provider = Provider.of<MyProvider>(context, listen: false);
+    Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+  }
 }

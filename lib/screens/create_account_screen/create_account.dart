@@ -1,9 +1,13 @@
 import 'package:chat/base.dart';
+import 'package:chat/models/my_user.dart';
 import 'package:chat/screens/create_account_screen/create_account_navigator.dart';
 import 'package:chat/screens/create_account_screen/create_account_viewmodel.dart';
+import 'package:chat/screens/home/home.dart';
 import 'package:chat/screens/login_screen/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../providers/my_provider.dart';
 
 class CreateAccount extends StatefulWidget {
   static const String routeName = 'create-account';
@@ -18,6 +22,8 @@ class _CreateAccountState
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var fNameController = TextEditingController();
+  var userNameController = TextEditingController();
   bool visible = true;
 
   @override
@@ -71,6 +77,7 @@ class _CreateAccountState
                               return null;
                             },
                             textInputAction: TextInputAction.next,
+                            controller: fNameController,
                             decoration: InputDecoration(
                                 hintText: "First Name",
                                 border: OutlineInputBorder(
@@ -94,6 +101,7 @@ class _CreateAccountState
                               return null;
                             },
                             textInputAction: TextInputAction.next,
+                            controller: userNameController,
                             decoration: InputDecoration(
                                 hintText: "UserName",
                                 border: OutlineInputBorder(
@@ -187,8 +195,6 @@ class _CreateAccountState
                               ),
                               onPressed: () {
                                 validateForm();
-                                viewModel.navigator!.hideLoading();
-                                navigate();
                               },
                               child: Row(
                                 mainAxisAlignment:
@@ -207,6 +213,15 @@ class _CreateAccountState
                               ),
                             ),
                           ),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(
+                                    context, LoginScreen.routeName);
+                              },
+                              child: const Text(
+                                "I have an Account Login Here ",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ))
                         ],
                       ),
                     ),
@@ -223,7 +238,10 @@ class _CreateAccountState
   void validateForm() {
     if (formKey.currentState!.validate()) {
       viewModel.createAccountWithFirebaseAuth(
-          emailController.text, passwordController.text);
+          emailController.text,
+          passwordController.text,
+          fNameController.text,
+          userNameController.text);
     }
   }
 
@@ -233,7 +251,8 @@ class _CreateAccountState
   }
 
   @override
-  void navigate() {
-    Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+  void goToHome(MyUser myUser) {
+    var provider = Provider.of<MyProvider>(context, listen: false);
+    Navigator.pushReplacementNamed(context, HomeScreen.routeName);
   }
 }
