@@ -22,7 +22,6 @@ class _ChatScreenState extends BaseView<ChatScreen, ChatViewModel>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     viewModel.navigator = this;
   }
@@ -54,6 +53,15 @@ class _ChatScreenState extends BaseView<ChatScreen, ChatViewModel>
                 style:
                     const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.more_vert,
+                    size: 30,
+                  ),
+                ),
+              ],
             ),
             body: Form(
               child: Container(

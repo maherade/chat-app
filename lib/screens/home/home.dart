@@ -23,6 +23,7 @@ class _HomeScreenState extends BaseView<HomeScreen, HomeViewModel>
     super.initState();
     viewModel.navigator = this;
     viewModel.readRooms();
+    setState(() {});
   }
 
   @override
@@ -54,6 +55,12 @@ class _HomeScreenState extends BaseView<HomeScreen, HomeViewModel>
               centerTitle: true,
               title: const Text("Chat App"),
               actions: [
+                const Center(
+                  child: Text(
+                    "Log Out",
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                  ),
+                ),
                 IconButton(
                     onPressed: () {
                       FirebaseAuth.instance.signOut();

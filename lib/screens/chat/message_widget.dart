@@ -36,33 +36,41 @@ class SenderMessage extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        InkWell(
-          onLongPress: () {
-            // FirebaseFirestore.instance.collection('Messages').doc(message.id).update({
-            //   message.id : FieldValue.delete(),
-            // });
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            decoration: BoxDecoration(
-              color: Colors.blue.withOpacity(.9),
-              borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(12),
-                  bottomLeft: Radius.circular(12),
-                  topLeft: Radius.circular(12)),
-            ),
-            child: Text(
-              message.content,
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
+        Text(message.senderName),
         const SizedBox(
           height: 2,
         ),
-        Text(
-          date.substring(12),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          decoration: BoxDecoration(
+            color: Colors.blue.withOpacity(.9),
+            borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(12),
+                bottomLeft: Radius.circular(12),
+                topLeft: Radius.circular(12)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                message.content,
+                style: const TextStyle(color: Colors.white),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                date.substring(
+                  12,
+                ),
+                style: TextStyle(color: Colors.white, fontSize: 10),
+              ),
+            ],
+          ),
         ),
+        SizedBox(
+          height: 5,
+        )
       ],
     );
   }
@@ -82,8 +90,9 @@ class RecievedMessage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(message.senderName),
         const SizedBox(
-          height: 8,
+          height: 2,
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -94,18 +103,33 @@ class RecievedMessage extends StatelessWidget {
                 bottomRight: Radius.circular(12),
                 topLeft: Radius.circular(12)),
           ),
-          child: Text(
-            message.content,
-            style: const TextStyle(color: Color.fromRGBO(120, 121, 147, 1.0)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                message.content,
+                style:
+                    const TextStyle(color: Color.fromRGBO(120, 121, 147, 1.0)),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                textAlign: TextAlign.end,
+                date.substring(12),
+                style: TextStyle(fontSize: 10),
+              ),
+            ],
           ),
         ),
-        const SizedBox(
-          height: 2,
-        ),
-        Text(
-          date.substring(12),
-        ),
+        SizedBox(
+          height: 10,
+        )
       ],
     );
   }
+
+//   FirebaseFirestore.instance.collection('Messages').doc(message.id).update({
+//   message.id : FieldValue.delete(),
+// });
 }
