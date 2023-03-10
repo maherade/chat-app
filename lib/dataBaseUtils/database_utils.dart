@@ -52,6 +52,13 @@ class DataBaseUtils {
     return docRef.set(room);
   }
 
+  static Future<void> deleteRoomFromFireStore(Room room) {
+    var collection = getRoomsCollection();
+    var docRef = collection.doc();
+    room.id = docRef.id;
+    return docRef.delete();
+  }
+
   static Future<List<Room>> readRoomsFromFireStore() async {
     QuerySnapshot<Room> snapRooms = await getRoomsCollection().get();
 

@@ -196,8 +196,6 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
     return LoginViewModel();
   }
 
-  @override
-  void navigate() {}
 
   @override
   void goToHome(MyUser myUser) {

@@ -6,18 +6,17 @@ class Room {
   String description;
   String catId;
 
-  Room(
-      {this.id = "",
-      required this.title,
-      required this.description,
-      required this.catId});
+  Room({this.id = "",
+    required this.title,
+    required this.description,
+    required this.catId});
 
   Room.fromJson(Map<String, dynamic> json)
       : this(
-          id: json["id"],
-          title: json["title"],
-          description: json["description"],
-          catId: json["catId"],
+    id: json["id"],
+    title: json["title"],
+    description: json["description"],
+    catId: json["catId"],
         );
 
   Map<String, dynamic> toJson() {
@@ -28,4 +27,11 @@ class Room {
       "catId": catId
     };
   }
+//
+// static List<Room> deleteRoom() {
+//   return [
+//     Room.fromJson(),
+//
+//   ];
+// }
 }

@@ -23,12 +23,10 @@ abstract class BaseView<T extends StatefulWidget, VM extends BaseViewModel>
     viewModel = initViewModel();
   }
 
-  @override
   void hideDialog() {
     Navigator.pop(context);
   }
 
-  @override
   void showLoading({String message = "Loading"}) {
     showDialog(
       context: context,
@@ -38,10 +36,10 @@ abstract class BaseView<T extends StatefulWidget, VM extends BaseViewModel>
             child: Row(
               children: [
                 Text(message),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
-                CircularProgressIndicator(),
+                const CircularProgressIndicator(),
               ],
             ),
           ),
@@ -50,7 +48,6 @@ abstract class BaseView<T extends StatefulWidget, VM extends BaseViewModel>
     );
   }
 
-  @override
   void showMessage(String message) {
     showDialog(
       context: context,
