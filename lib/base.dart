@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 
 abstract class BaseNavigator {
   void showLoading({String message});
-
   void showMessage(String message);
 
-  void hideLoading();
-
-  void navigate();
+  void hideDialog();
 }
 
 abstract class BaseViewModel<NAV extends BaseNavigator> extends ChangeNotifier {
@@ -26,12 +23,10 @@ abstract class BaseView<T extends StatefulWidget, VM extends BaseViewModel>
     viewModel = initViewModel();
   }
 
-  @override
-  void hideLoading() {
+  void hideDialog() {
     Navigator.pop(context);
   }
 
-  @override
   void showLoading({String message = "Loading"}) {
     showDialog(
       context: context,
@@ -41,10 +36,10 @@ abstract class BaseView<T extends StatefulWidget, VM extends BaseViewModel>
             child: Row(
               children: [
                 Text(message),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
-                CircularProgressIndicator(),
+                const CircularProgressIndicator(),
               ],
             ),
           ),
@@ -53,7 +48,6 @@ abstract class BaseView<T extends StatefulWidget, VM extends BaseViewModel>
     );
   }
 
-  @override
   void showMessage(String message) {
     showDialog(
       context: context,
